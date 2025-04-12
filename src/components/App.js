@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import ItemForm from "./ItemForm";
 import ShoppingList from "./ShoppingList";
+import initialItems from "../data/items";
 import Header from "./Header";
-import itemData from "../data/items";
 
 function App() {
-  const [items, setItems] = useState(itemData);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [items, setItems] = useState(initialItems);
 
-  function handleDarkModeClick() {
-    setIsDarkMode((isDarkMode) => !isDarkMode);
+  function handleItemFormSubmit(newItem) {
+    setItems((prevItems) => [...prevItems, newItem]); // Add new item to state
   }
 
   return (
-    <div className={"App " + (isDarkMode ? "dark" : "light")}>
-      <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
+    <div>
+      <ItemForm onItemFormSubmit={handleItemFormSubmit} />
       <ShoppingList items={items} />
     </div>
   );
